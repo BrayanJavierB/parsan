@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/index :: head">
+    <title>Lista de Facturas</title>
+    <style>
+        .search-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .search-container input {
+            margin-right: 10px;
+            padding: 5px;
+            font-size: 16px;
+        }
+        .search-container button {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+        }
+        .container {
+            background-color: #ffffcc; /* Color amarillo pálido */
+            padding: 20px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header th:replace="/index :: header"></header>
+    
+    <div align="center" class="container">
+        <h1>Lista de Facturas</h1>
+        <div><h5 style="margin-right: 600px;">Buscar por proveedor o insumo: </h5></div>
+        <div class="search-container">
+        
+    <input type="search" id="searchInput" placeholder="Buscar..." oninput="search()">
+    <button onclick="search()" type="submit" style="margin-right: 500px;">
+        <img src="/img/IconoBusqueda.png" alt="Buscar" style="width: 20px; height: 20px;">
+    </button>
+    <a href="/views/facturas/new" class="btn btn-success">Nueva Factura</a>
+</div>
+
+        <br><br>
+      
+       
+        <table border="3" class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Precio</th>
+                    <th>Cantidad</th>
+                    <th>Total</th>
+                    <th>Fecha</th>
+                    <th>ID Insumo</th>
+                    <th>Nombre Insumo</th>
+                    <th>Nombre Proveedor</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="facturaTable">
+                <tr th:each="factura : ${listaFacturas}">
+                    <td th:text="${factura.idFactura}"></td>
+                    <td th:text="${factura.precio}"></td>
+                    <td th:text="${factura.cantidad}"></td>
+                    <td th:text="${factura.total}"></td>
+                    <td th:text="${factura.fecha}"></td>
+                    <td th:text="${factura.insumo.idInsumo}"></td>
+                    <td th:text="${factura.nomInsumo}"></td>
+                    <td th:text="${factura.nomProveedor}"></td>
+                    <td>
+                        <a th:href="@{'/views/facturas/listar/' + ${factura.idFactura}}" class="btn btn-info">
+                            <img src="/img/IconoEditar.png" alt="Editar" style="width: 30px; height: 30px;"></a>
+                        <a th:href="@{'/views/facturas/delete/' + ${factura.idFactura}}" class="btn btn-danger">
+                            <img src="/img/IconoBorrar2.png" alt="Eliminar" style="width: 30px; height: 30px;"></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <br><br>
+    </div>
+    <footer th:replace="/index :: footer"></footer>
+    <script>
+    function search() {
+        const input = document.getElementById('searchInput').value.toLowerCase();
+        const rows = document.querySelectorAll('#facturaTable tr');
+        rows.forEach(row => {
+            const proveedor = row.querySelector('td:nth-child(8)').textContent.toLowerCase();
+            const insumo = row.querySelector('td:nth-child(7)').textContent.toLowerCase();
+            if (proveedor.includes(input) || insumo.includes(input)) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    }
+</script>
+
+<script>
+    // Función para formatear un número en formato de miles
+    function formatNumber(number) {
+        return new Intl.NumberFormat('es-CO', { maximumFractionDigits: 2 }).format(number);
+    }
+
+    // Formatear números al cargar la página
+    document.addEventListener('DOMContentLoaded', function() {
+        const cellsToFormat = document.querySelectorAll('#facturaTable td:nth-child(2), #facturaTable td:nth-child(3), #facturaTable td:nth-child(4)');
+        cellsToFormat.forEach(cell => {
+            const number = parseFloat(cell.textContent.replace(',', '.')); // Reemplaza cualquier coma por un punto para que parsee correctamente
+            if (!isNaN(number)) {
+                cell.textContent = formatNumber(number);
+            }
+        });
+    });
+</script>
+    
+
+</body>
+</html>

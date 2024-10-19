@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/index :: head">
+    <title>Crear Insumo</title>
+</head>
+<body>
+    <header th:replace="/index :: header"></header>
+    <div class="container">
+        <div class="col-5 col-md-5 offset-md-3">
+        <br>
+            <h1 class= "text-center">Creación de Insumo</h1>
+            <form th:action="@{/views/insumos/save}" th:object="${insumo}" method="POST">
+            <div class="form-group">
+                    <label for="idInsumo">ID:</label>
+                    <input type="text" th:field="*{idInsumo}" class="form-control" id="idInsumo"/>
+                    <span class="text-danger" th:if="${#fields.hasErrors('idInsumo')}" th:errors="*{idInsumo}">El ID del insumo debe ser mayor que 0</span>
+                </div>
+                <div class="form-group">
+                    <label for="nomInsumo">Nombre:</label>
+                    <input type="text" th:field="*{nomInsumo}" class="form-control" id="nomInsumo"/>
+                    <span class="text-danger" th:if="${#fields.hasErrors('nomInsumo')}" th:errors="*{nomInsumo}">El nombre debe tener entre 3 y 50 caracteres</span>
+                </div>
+                <div class="form-group">
+                    <label for="descrip">Descripción:</label>
+                    <textarea th:field="*{descrip}" class="form-control" id="descrip"></textarea>
+                    <span class="text-danger" th:if="${#fields.hasErrors('descrip')}" th:errors="*{descrip}">La descripción debe tener entre 5 y 200 caracteres</span>
+                </div>
+                <div class="form-group">
+                    <label for="precioDeProveedor">Precio del Proveedor:</label>
+                    <input type="text" th:field="*{precioDeProveedor}" class="form-control" id="precioDeProveedor"/>
+                </div>
+                <div class="form-group">
+                    <label for="clase">Clase:</label>
+                    <input type="text" th:field="*{clase}" class="form-control" id="clase"/>
+                    <span class="text-danger" th:if="${#fields.hasErrors('clase')}" th:errors="*{clase}">La clase debe tener entre 3 y 50 caracteres</span>
+                </div>
+                <div class="form-group">
+                    <label for="nitProveedor">NIT del Proveedor:</label>
+                    <input type="text" th:field="*{nitProveedor}" class="form-control" id="nitProveedor"/>
+                    <span class="text-danger" th:if="${#fields.hasErrors('nitProveedor')}" th:errors="*{nitProveedor}">El NIT del proveedor debe tener entre 3 y 20 caracteres</span>
+                </div>
+                <div class="form-group">
+                    <label for="nomProveedor">Nombre del Proveedor:</label>
+                    <input type="text" th:field="*{nomProveedor}" class="form-control" id="nomProveedor"/>
+                    <span class="text-danger" th:if="${#fields.hasErrors('nomProveedor')}" th:errors="*{nomProveedor}">El nombre del proveedor debe tener entre 3 y 50 caracteres</span>
+                </div>
+                <br><br>
+                <div class="col-12 text-center">
+                <button type="submit" class="btn btn-primary">
+                <img src="/img/IconoGuardar.png" alt="Guardar" style="width: 80px; height: 80px;"></button>
+                </div>
+                <br><br>
+                <br><br>
+                <br><br>
+            </form>
+        </div>
+    </div>
+    <footer th:replace="/index :: footer"></footer>
+</body>
+</html>

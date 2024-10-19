@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/index :: head">
+    <title>Actualizar Insumo</title>
+    <style>
+        .custom-input {
+            background-color: #f2f2f2; /* Fondo de color gris claro */
+            width: 70%; /* Reduce el ancho de las cajas de entrada */
+            display: inline-block; /* Hace que las cajas de entrada se muestren en línea */
+        }
+    </style>
+</head>
+<body>
+    <header th:replace="/index :: header"></header>
+    <div class="container">
+        <div class="col-5 col-md-5 offset-md-3 ">
+        <br>
+            <h1 class="text-center">Actualización de Insumo</h1>
+            <br>
+            <form th:action="@{/views/insumos/save}" th:object="${insumo}" method="POST">
+                <div class="form-group row" >
+                    <label for="idInsumo" class="" >ID:</label>
+                    <div>
+                        <input type="text" th:field="*{idInsumo}" class="form-control custom-input" id="idInsumo" readonly />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="nomInsumo" >Nombre:</label>
+                    <div>
+                        <input type="text" th:field="*{nomInsumo}" class="form-control custom-input" id="nomInsumo" required />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="descrip">Descripción:</label>
+                    <div>
+                        <textarea th:field="*{descrip}" class="form-control custom-input" id="descrip" required></textarea>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="precioDeProveedor">Precio del Proveedor:</label>
+                    <div>
+                        <input type="text" th:field="*{precioDeProveedor}" class="form-control custom-input" id="precioDeProveedor" required />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="clase">Clase:</label>
+                    <div>
+                        <input type="text" th:field="*{clase}" class="form-control custom-input" id="clase" required />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="nitProveedor">NIT del Proveedor:</label>
+                    <div>
+                        <input type="text" th:field="*{nitProveedor}" class="form-control custom-input" id="nitProveedor" required />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="nomProveedor">Nombre del Proveedor:</label>
+                    <div>
+                        <input type="text" th:field="*{nomProveedor}" class="form-control custom-input" id="nomProveedor" required />
+                    </div>
+                </div>
+                <br>
+                <div class="form-group row">
+                <div class="col-12 text-center">
+                <button type="submit" class="btn btn-info" >
+                <img src="/img/IconoGuardar.png" alt="Guardar" style="width: 80px; height: 80px;"></button>
+                 </div>
+                </div>
+                <br><br>
+            </form>
+        </div>
+    </div>
+    <footer th:replace="/index :: footer"></footer>
+</body>
+</html>

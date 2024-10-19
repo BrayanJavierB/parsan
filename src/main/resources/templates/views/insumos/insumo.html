@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/index :: head">
+    <title>Lista de Insumos</title>
+</head>
+<body>
+    <header th:replace="/index :: header"></header>
+    <div align="center" class="container">
+        <h1>Lista de Insumos</h1>
+        <a href="/views/insumos/new" class="btn btn-success">Nuevo Insumo</a>
+        <br><br>
+        <table border="3" class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Precio del Proveedor</th>
+                    <th>Clase</th>
+                    <th>NIT del Proveedor</th>
+                    <th>Nombre del Proveedor</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="insumo : ${listaInsumos}">
+                    <td th:text="${insumo.idInsumo}"></td>
+                    <td th:text="${insumo.nomInsumo}"></td>
+                    <td th:text="${insumo.descrip}"></td>
+                    <td th:text="${insumo.precioDeProveedor}"></td>
+                    <td th:text="${insumo.clase}"></td>
+                    <td th:text="${insumo.nitProveedor}"></td>
+                    <td th:text="${insumo.nomProveedor}"></td>
+                    <td>
+						<a th:href="@{'/views/insumos/listar/' + ${insumo.idInsumo}}" class="btn btn-info">	
+						<img src="/img/IconoEditar.png" alt="Editar" style="width: 20px; height: 20px;"></a>
+						<a th:href="@{'/views/insumos/delete/' + ${insumo.idInsumo}}" class="btn btn-danger"> 
+						<img src="/img/IconoBorrar2.png" alt="Editar" style="width: 20px; height: 20px;"></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <br><br>
+    </div>
+    <footer th:replace="/index :: footer"></footer>
+</body>
+</html>

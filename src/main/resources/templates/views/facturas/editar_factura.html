@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/index :: head">
+    <title>Actualizar Factura</title>
+</head>
+<body>
+    <header th:replace="/index :: header"></header>
+    <div class="container">
+        <div class="col-5 col-md-5 offset-md-3">
+            <br>
+            <h1 class="text-center">Actualización de Factura</h1>
+            <form th:action="@{/views/facturas/save}" th:object="${factura}" method="POST">
+                <div class="form-group">
+                    <label for="idFactura">ID:</label>
+                    <input type="text" th:field="*{idFactura}" class="form-control" id="idFactura" readonly />
+                </div>
+                <div class="form-group">
+                    <label for="precio">Precio:</label>
+                    <input type="text" th:field="*{precio}" class="form-control" id="precio" required />
+                </div>
+                <div class="form-group">
+                    <label for="cantidad">Cantidad:</label>
+                    <input type="text" th:field="*{cantidad}" class="form-control" id="cantidad" required />
+                </div>
+                <div class="form-group">
+                    <label for="fecha">Fecha:</label>
+                    <input type="text" th:field="*{fecha}" class="form-control" id="fecha" required />
+                </div>
+                <div class="form-group">
+                    <label for="insumo">ID Insumo:</label>
+                    <input type="text" th:field="*{insumo.idInsumo}" class="form-control" id="insumo" required />
+                </div>
+                <div class="form-group">
+                    <label for="nomInsumo">Nombre Insumo:</label>
+                    <input type="text" th:field="*{nomInsumo}" class="form-control" id="nomInsumo" required />
+                </div>
+                <div class="form-group">
+                    <label for="nomProveedor">Nombre Proveedor:</label>
+                    <input type="text" th:field="*{nomProveedor}" class="form-control" id="nomProveedor" required />
+                </div>
+                <br>
+                <div class="col-12 text-center">
+                    <button type="submit" class="btn btn-info">
+                    <img src="/img/IconoGuardar.png" alt="Guardar" style="width: 80px; height: 80px;"></button>
+                </div>
+                <br><br>
+            </form>
+        </div>
+    </div>
+    <footer th:replace="/index :: footer"></footer>
+</body>
+</html>

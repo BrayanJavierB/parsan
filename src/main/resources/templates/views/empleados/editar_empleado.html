@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/index :: head">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Empleado</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <style>
+        .custom-input {
+            background-color: #f2f2f2; /* Fondo de color gris claro */
+            width: 70%; /* Reduce el ancho de las cajas de entrada */
+            display: inline-block; /* Hace que las cajas de entrada se muestren en línea */
+        }
+    </style>
+    <script>
+        function formatSalary() {
+            var input = document.getElementById('salario');
+            var salary = parseFloat(input.value.replace(/\./g, '').replace(',', '.'));
+            if (!isNaN(salary)) {
+                input.value = salary.toLocaleString('es-ES');
+            }
+        }
+    </script>
+</head>
+<body>
+	<header th:replace="/index :: header"></header>
+    <div class="container">
+        <div class="col-7 col-md-7 offset-md-2 text-center"> <!-- Añade la clase text-center para centrar el contenido -->
+            <br> 
+            <h1>Edición de Empleado</h1>
+            <br> 
+            <form action="#" th:action="@{/views/empleados/save}" th:object="${empleado}" method="POST">
+                <div class="form-group row"> <!-- Utiliza una fila para el grupo de formularios -->
+                    <label class="col-sm-2 col-form-label">Id Empleado:</label>
+                    <div class="col-sm-10"> <!-- Utiliza una columna para la entrada -->
+                        <input type="text" class="form-control custom-input" readonly th:field="*{id_empleado}">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Nombre:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control custom-input" placeholder="Nombre Empleado" th:field="*{nombre}">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Apellido:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control custom-input" placeholder="Apellido Empleado" th:field="*{apellido}">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Edad:</label>
+                    <div class="col-sm-10">
+                        <input type="number" class="form-control custom-input" placeholder="Edad" th:field="*{edad}">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Género:</label>
+                    <div class="col-sm-10">
+                        <select class="form-control custom-input" th:field="*{genero}">
+                            <option value="Masculino">Masculino</option>
+                            <option value="Femenino">Femenino</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Teléfono:</label>
+                    <div class="col-sm-10">
+                        <input type="number" class="form-control custom-input" placeholder="Teléfono" th:field="*{telefono}">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Cargo:</label>
+                    <div class="col-sm-10">
+                        <select class="form-control custom-input" th:field="*{cargo}">
+                            <option value="Jefe">Jefe</option>
+                            <option value="Empleado">Empleado</option>
+                            <option value="Empresario">Empresario</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Salario:</label>
+                    <div class="col-sm-10">
+                        <input id="salario" type="text" class="form-control custom-input" placeholder="Salario" th:field="*{salario}" onkeyup="formatSalary()">
+                    </div>
+                </div>
+                <br>
+                <button type="submit" class="btn btn-info">
+                    <img src="/img/IconoGuardar.png" alt="Guardar" style="width: 80px; height: 80px;">
+                </button>
+            </form>
+        </div>
+    </div>
+    <footer th:replace="/index :: footer"></footer>
+</body>
+</html>
+
+

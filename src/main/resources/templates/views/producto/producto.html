@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/index :: head">
+    <title>Lista de Productos</title>
+</head>
+<body>
+	<header th:replace="/index :: header"></header>
+    <div align="center" class="container">
+		<h1>Listado de Productos</h1>
+            <a href="/views/producto/new" class="btn btn-success">Crear un Producto</a ></br></br>
+            <table border="3" class="table table-striped">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Nombre</th>
+					<th>Precio</th>
+					<th>Clase</th>
+					<th>Acciones</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="producto : ${listaProductos}">
+					<td th:text="${producto.id_producto}"></td>
+					<td th:text="${producto.nombre}"></td>
+					<td th:text="${producto.precio}"></td>
+					<td th:text="${producto.clase}"></td>
+					<td>
+						<a th:href="@{'/views/producto/listar/' + ${producto.id_producto}}" class="btn btn-info">
+						<img src="/img/IconoEditar.png" alt="Editar" style="width: 40px; height: 40px;"></a>
+						<a th:href="@{'/views/producto/delete/' + ${producto.id_producto}}" class="btn btn-danger">
+						<img src="/img/IconoBorrar2.png" alt="Editar" style="width: 40px; height: 40px;"></a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<br><br>
+	</div>
+	<footer th:replace="/index :: footer"></footer>
+</body>
+</html>

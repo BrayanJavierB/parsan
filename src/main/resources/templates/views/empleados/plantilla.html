@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout/plantilla :: head">
+    <title>Lista de Empleados</title>
+</head>
+<body>
+	<header th:replace="/layout/plantilla :: header"></header>
+    <div align="center" class="container">
+    <br>
+		<h1>Listado de Empleados</h1>
+		<br>
+            <table border="3" class="table table-striped">
+				<thead>
+				                <tr>
+				                    <th>Id Empleado</th>
+				                    <th>Nombre</th>
+				                    <th>Apellido</th>
+				                    <th>Edad</th>
+				                    <th>Genero</th>
+									<th>Telefono</th>
+									<th>Cargo</th>
+									<th>Salario</th>
+				                </tr>
+				            </thead>
+				            <tbody>
+				      <tr th:each="empleado: ${listaEmpleados}">
+				                    <td th:text="${empleado.id_empleado}"></td>
+				                    <td th:text="${empleado.nombre}"></td>
+				                    <td th:text="${empleado.apellido}"></td>
+				                    <td th:text="${empleado.edad + ' años'}"></td>
+				                    <td th:text="${empleado.genero}"></td>
+									<td th:text="${empleado.telefono}"></td>
+									<td th:text="${empleado.cargo}"></td>
+									<td th:text="${empleado.salario}"></td>
+					
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<footer th:replace="/layout/plantilla :: footer"></footer>
+</body>
+</html>

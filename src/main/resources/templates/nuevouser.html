@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/index :: head">
+    <title>Lista de Facturas</title>
+    <style>
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            background-color: #ffffcc; /* Color amarillo pálido */
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .factura {
+            width: calc(33.33% - 20px); /* Para dividir en 3 columnas */
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            vertical-align: top;
+        }
+        .factura h2 {
+            margin-top: 0;
+        }
+        .search-container {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header th:replace="/index :: header"></header>
+    
+    <div align="center">
+        <h1>Lista de Facturas</h1>
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Buscar por nombre de proveedor" oninput="searchByProveedor()">
+        </div>
+        <a href="/views/facturas/new" class="btn btn-success">Nueva Factura</a>
+        <br><br>
+        <div class="container" id="facturaContainer">
+            <div th:each="factura : ${listaFacturas}" class="factura">
+                <h2>Factura ID: <span th:text="${factura.idFactura}"></span></h2>
+                <h2>Nombre Proveedor: <span class="proveedor" th:text="${factura.nomProveedor}"></span></h2>
+                <h4>Precio: <span th:text="${factura.precio}"></span></h4>
+                <p>Fecha: <span th:text="${factura.fecha}"></span></p>
+                <p>ID Insumo: <span th:text="${factura.insumo.idInsumo}"></span></p>
+                <p>Nombre Insumo: <span th:text="${factura.nomInsumo}"></span></p>
+                <div>
+                    <a th:href="@{'/views/facturas/listar/' + ${factura.idFactura}}" class="btn btn-info">
+                        <img src="/img/IconoEditar.png" alt="Editar" style="width: 20px; height: 20px;"></a>
+                    <a th:href="@{'/views/facturas/delete/' + ${factura.idFactura}}" class="btn btn-danger">
+                        <img src="/img/IconoBorrar2.png" alt="Eliminar" style="width: 20px; height: 20px;"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer th:replace="/index :: footer"></footer>
+    <script>
+        function searchByProveedor() {
+            const input = document.getElementById('searchInput').value.toLowerCase();
+            const facturas = document.querySelectorAll('.factura');
+            facturas.forEach(factura => {
+                const proveedor = factura.querySelector('.proveedor').textContent.toLowerCase();
+                if (proveedor.includes(input)) {
+                    factura.style.display = '';
+                } else {
+                    factura.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/index :: head">
+    <title>Actualizar Producto</title>
+    <style>
+        .custom-input {
+            background-color: #f2f2f2; /* Fondo de color gris claro */
+            width: 70%; /* Reduce el ancho de las cajas de entrada */
+            display: inline-block; /* Hace que las cajas de entrada se muestren en línea */
+        }
+    </style>
+</head>
+<body>
+	<header th:replace="/index :: header"></header>
+	<div class="container">
+		<div class="col-3 col-md-4 offset-md-4">
+		<br>
+			<h1 class="text-center">Actualización de Producto</h1>
+			<br>
+			<form action="#" th:action="@{/views/producto/save}" th:object="${producto}" method="POST">
+				<div class="form-group row ">
+					<label>ID:</label>
+					<div>
+						<input type="text" class="form-control custom-input" th:field="*{id_producto}" readonly>
+					</div>
+				</div>
+				<div class="form-group row">
+					<label>Nombre:</label>
+					<div>
+						<input type="text" class="form-control custom-input" th:field="*{nombre}">
+					</div>
+				</div>
+				<div>
+					<label>Precio:</label>
+					<div>
+						<input type="text" class="form-control custom-input" th:field="*{precio}">
+					</div>
+				</div>
+				<div class="form-group row">
+					<label>Clase:</label>
+					<div>
+						<input type="text" class="form-control custom-input" th:field="*{clase}">
+					</div>
+				</div>
+				<br>
+				<div class="col-12 text-center">
+				<button type="submit" class="btn btn-info">
+				<img src="/img/IconoGuardar.png" alt="Guardar" style="width: 80px; height: 80px;"></button>
+				</div>
+			</form>
+		</div>
+	</div>
+	<footer th:replace="/index :: footer"></footer>
+</body>
+</html>

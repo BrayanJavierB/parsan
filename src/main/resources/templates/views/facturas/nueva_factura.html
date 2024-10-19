@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/index :: head">
+    <title>Crear Factura</title>
+</head>
+<body>
+    <header th:replace="/index :: header"></header>
+    <div class="container">
+        <div class="col-5 col-md-5 offset-md-3">
+            <br>
+            <h1 class="text-center">Creación de Factura</h1>
+            <form th:action="@{/views/facturas/save}" th:object="${factura}" method="POST">
+                <div class="form-group">
+                    <label for="idFactura">ID:</label>
+                    <input type="text" th:field="*{idFactura}" class="form-control" id="idFactura" required />
+                </div>
+                <div class="form-group">
+                    <label for="precio">Precio:</label>
+                    <input type="text" th:field="*{precio}" class="form-control" id="precio" required />
+                </div>
+                <div class="form-group">
+                    <label for="cantidad">Cantidad:</label>
+                    <input type="text" th:field="*{cantidad}" class="form-control" id="cantidad" required />
+                </div>
+                <div class="form-group">
+                    <label for="fecha">Fecha:</label>
+                    <input type="date" th:field="*{fecha}" class="form-control" id="fecha" required />
+                </div>
+                <div class="form-group">
+                    <label for="insumo">ID Insumo:</label>
+                    <select th:field="*{insumo.idInsumo}" class="form-control" id="insumo" required>
+                        <option th:each="insumo : ${listaInsumos}"
+                                th:value="${insumo.idInsumo}"
+                                th:text="${insumo.idInsumo} + ' - ' + ${insumo.nomInsumo}"
+                                th:data-nombre="${insumo.nomInsumo}"
+                                th:data-proveedor="${insumo.nomProveedor}"
+                                th:data-precio="${insumo.precioDeProveedor}"></option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="nomInsumo">Nombre Insumo:</label>
+                    <input type="text" th:field="*{nomInsumo}" class="form-control" id="nomInsumo" required readonly/>
+                </div>
+                <div class="form-group">
+                    <label for="nomProveedor">Nombre Proveedor:</label>
+                    <input type="text" th:field="*{nomProveedor}" class="form-control" id="nomProveedor" required readonly/>
+                </div>
+                <br>
+                <div class="col-12 text-center">
+                    <button type="submit" class="btn btn-primary">
+                    <img src="/img/IconoGuardar.png" alt="Guardar" style="width: 80px; height: 80px;"></button>
+                </div>
+                <br><br>
+            </form>
+        </div>
+    </div>
+    <footer th:replace="/index :: footer"></footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const insumoSelect = document.getElementById("insumo");
+            const nomInsumoInput = document.getElementById("nomInsumo");
+            const nomProveedorInput = document.getElementById("nomProveedor");
+            const precioInput = document.getElementById("precio");
+
+            insumoSelect.addEventListener("change", function() {
+                const selectedOption = insumoSelect.options[insumoSelect.selectedIndex];
+                const nombreInsumo = selectedOption.getAttribute("data-nombre");
+                const proveedorInsumo = selectedOption.getAttribute("data-proveedor");
+                const precioInsumo = selectedOption.getAttribute("data-precio");
+
+                nomInsumoInput.value = nombreInsumo;
+                nomProveedorInput.value = proveedorInsumo;
+                precioInput.value = precioInsumo;
+            });
+
+            // Trigger change event on page load to pre-fill fields if needed
+            insumoSelect.dispatchEvent(new Event("change"));
+        });
+    </script>
+</body>
+</html>
+

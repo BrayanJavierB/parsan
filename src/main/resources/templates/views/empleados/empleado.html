@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/index :: head">
+    <title>Lista de Empleados</title>
+</head>
+<body>
+	<header th:replace="/index :: header"></header>
+    <div align="center" class="container">
+		<h1>Listado de Empleados</h1>
+            <a href="/views/empleados/new" class="btn btn-success">Crear un Empleado</a ></br></br>
+            <table border="3" class="table table-striped">
+				<thead>
+				                <tr>
+				                    <th>Id Empleado</th>
+				                    <th>Nombre</th>
+				                    <th>Apellido</th>
+				                    <th>Edad</th>
+				                    <th>Genero</th>
+									<th>Telefono</th>
+									<th>Cargo</th>
+									<th>Salario</th>
+				                    <th>Acciones</th>
+				                </tr>
+				            </thead>
+				            <tbody>
+				      <tr th:each="empleado: ${listaEmpleados}">
+				                    <td th:text="${empleado.id_empleado}"></td>
+				                    <td th:text="${empleado.nombre}"></td>
+				                    <td th:text="${empleado.apellido}"></td>
+				                    <td th:text="${empleado.edad + ' años'}"></td>
+				                    <td th:text="${empleado.genero}"></td>
+									<td th:text="${empleado.telefono}"></td>
+									<td th:text="${empleado.cargo}"></td>
+									
+									<td th:text="${empleado.salario}"></td>
+									
+				                    <td>
+				                        <a th:href="@{'/views/empleados/listar/' + ${empleado.id_empleado}}" class="btn btn-info">	
+											<img src="/img/IconoEditar.png" alt="Editar" style="width: 40px; height: 40px;"> </a>
+				                        <a th:href="@{'/views/empleados/delete/' + ${empleado.id_empleado}}" class="btn btn-danger"> 
+											<img src="/img/IconoBorrar2.png" alt="Editar" style="width: 40px; height: 40px;"> </a>
+				                    </td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<footer th:replace="/index :: footer"></footer>
+</body>
+</html>
+

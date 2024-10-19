@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/index :: head">
+    <title>Crear Producto</title>
+</head>
+<body>
+	<header th:replace="/index :: header"></header>
+	<div class="container">
+		<div class="col-3 col-md-4 offset-md-4">
+			<br>
+			<h1 class= "text-center">Creación de Producto</h1>
+			<br>
+			<form action="#" th:action="@{/views/producto/save}" th:object="${producto}" method="POST">
+				<div class="col">
+					<label>ID:</label>
+					<input type="text" class="form-control" th:field="*{id_producto}">
+					<span class="text-danger" th:if="${#fields.hasErrors('id_producto')}" th:errors="*{id_producto}">El ID del producto debe ser mayor que 0</span>
+				</div>
+				<div class="col">
+					<label>Nombre:</label>
+					<input type="text" class="form-control" th:field="*{nombre}">
+					<span class="text-danger" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}">El nombre debe tener entre 3 y 50 caracteres</span>
+				</div>
+				<div class="col">
+					<label>Precio:</label>
+					<input type="text" class="form-control" th:field="*{precio}">
+				</div>
+				<div class="col">
+					<label>Clase:</label>
+					<input type="text" class="form-control" th:field="*{clase}">
+					<span class="text-danger" th:if="${#fields.hasErrors('clase')}" th:errors="*{clase}">La clase debe tener entre 3 y 50 caracteres</span>
+				</div>
+				<br>
+				<div class="col-12 text-center">
+				<button type="submit" class="btn btn-primary">
+				<img src="/img/IconoGuardar.png" alt="Guardar" style="width: 80px; height: 80px;"></button>
+				</div>
+				<br><br>
+			</form>
+		</div>
+	</div>
+	<footer th:replace="/index :: footer"></footer>
+</body>
+</html>

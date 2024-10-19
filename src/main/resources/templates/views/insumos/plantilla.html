@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout/plantilla :: head">
+    <title>Lista de Insumos</title>
+</head>
+<body>
+    <header th:replace="/layout/plantilla :: header"></header>
+    <div align="center" class="container">
+    <br>
+        <h1>Lista de Insumos</h1>
+        <br>
+        <table border="3" class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Precio del Proveedor</th>
+                    <th>Clase</th>
+                    <th>NIT del Proveedor</th>
+                    <th>Nombre del Proveedor</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="insumo : ${listaInsumos}">
+                    <td th:text="${insumo.idInsumo}"></td>
+                    <td th:text="${insumo.nomInsumo}"></td>
+                    <td th:text="${insumo.descrip}"></td>
+                    <td th:text="${insumo.precioDeProveedor}"></td>
+                    <td th:text="${insumo.clase}"></td>
+                    <td th:text="${insumo.nitProveedor}"></td>
+                    <td th:text="${insumo.nomProveedor}"></td>
+                </tr>
+            </tbody>
+        </table>
+        <br><br>
+    </div>
+    <footer th:replace="/layout/plantilla :: footer"></footer>
+</body>
+</html>
