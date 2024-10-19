@@ -35,14 +35,14 @@ public class EmpleadoController {
 	public String verIndex(Model model) {
 		List<Empleado> listaEmpleados = servicio.listar();
 		model.addAttribute("listaEmpleados",listaEmpleados);
-		return "/views/empleados/empleado" ;
+		return "views/empleados/empleado" ;
 	}
 	
 	@GetMapping("/Empleado")
 	public String ver(Model model) {
 		List<Empleado> listaEmpleados = servicio.listar();
 		model.addAttribute("listaEmpleados",listaEmpleados);
-		return "/views/empleados/plantilla" ;
+		return "views/empleados/plantilla" ;
 	}
 	
 	@GetMapping("/new")
@@ -50,7 +50,7 @@ public class EmpleadoController {
 		Empleado empleado = new Empleado();
 		
 		model.addAttribute("empleado", empleado);
-		return "/views/empleados/nuevo_empleado";
+		return "views/empleados/nuevo_empleado";
 	}
 
 	@PostMapping("/save")
@@ -60,7 +60,7 @@ public class EmpleadoController {
 	        // Reagregar lista de datos necesarios en caso de error (ejemplo, lista de cargos, etc.)
 	        // model.addAttribute("listaCargos", servicio.listarCargos()); // Ejemplo si tienes lista de cargos
 
-	        return "/views/empleados/nuevo_empleado"; // Asegúrate de que este es el nombre correcto de la vista
+	        return "views/empleados/nuevo_empleado"; // Asegúrate de que este es el nombre correcto de la vista
 	    }
 	    servicio.save(empleado);
 	    attribute.addFlashAttribute("success", "Empleado guardado con éxito");
@@ -72,12 +72,12 @@ public class EmpleadoController {
 	public String listarId(@PathVariable int id_empleado, Model model) {
 		model.addAttribute("empleado", servicio.listarId(id_empleado));
 		
-		return "/views/empleados/editar_empleado";
+		return "views/empleados/editar_empleado";
 	}
 	
 	@RequestMapping("/delete/{id_empleado}")
 	public String deleteEmpleado(@PathVariable(name = "id_empleado") int id_empleado) {
 		servicio.delete(id_empleado);
-		return "redirect:/views/empleados/";
+		return "redirect:views/empleados/";
 	}		
 }
